@@ -1,17 +1,19 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { NavLink } from "react-router";
 
-const vehicleTarjeta = ({ cardtitle, cardtext }) => {
+const Vehicletarjeta = ({ cardtitle, url }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src="holder.js/100px180" />
       <Card.Body>
         <Card.Title>{cardtitle}</Card.Title>
-        <Card.Text>{cardtext}</Card.Text>
-        <Button variant="primary">Ver más</Button>
+        <Button variant="primary">
+          <NavLink to={`/vehicle/${url}`}>Ver más</NavLink>
+        </Button>
       </Card.Body>
     </Card>
   );
 };
 
-export default vehicleTarjeta;
+export default Vehicletarjeta;
