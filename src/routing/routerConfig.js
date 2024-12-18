@@ -1,4 +1,4 @@
-import Landing from "../pages/landing";
+import Landing from "../pages/Landing";
 import Vehicleunico from "../pages/Vehicleunico";
 
 export const routeConfig = [
