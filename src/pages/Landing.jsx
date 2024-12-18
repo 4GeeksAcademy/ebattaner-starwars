@@ -1,5 +1,7 @@
+import vehicleCarrousel from "../components/vehicleCarrousel";
+
 const Landing = () => {
-  return <h1>HOLA</h1>;
+  return <vehicleCarrousel />;
 };
 
 export default Landing;
