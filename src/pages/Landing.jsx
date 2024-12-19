@@ -1,7 +1,13 @@
-import Vehiclecarrousel from "../components/vehicleCarrousel";
+import Starshipcomponent from "../components/Starshipcomponent";
+import Vehiclecomponent from "../components/Vehiclecomponent";
 
 const Landing = () => {
-  return <Vehiclecarrousel />;
+  return (
+    <>
+      <Vehiclecomponent />
+      <Starshipcomponent />
+    </>
+  );
 };
 
 export default Landing;

@@ -1,28 +1,28 @@
-import Vehicletarjeta from "./vehicleTarjeta";
+import Starshiptarjeta from "./Starshiptarjeta";
 import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 
-const Vehiclecarrousel = () => {
-  const [vehicles, setVehicles] = useState([]);
+const Starshipcarrousel = () => {
+  const [starship, setStarship] = useState([]);
 
-  const fetchVehicles = () => {
-    fetch("https://www.swapi.tech/api/vehicles", { method: "GET" })
+  const fetchStarship = () => {
+    fetch("https://www.swapi.tech/api/starships", { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setVehicles(data.results))
+      .then((data) => setStarship(data.results))
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    fetchVehicles();
+    fetchStarship();
   }, []);
 
   return (
     <>
       {" "}
       <Row gap={2}>
-        {vehicles.map((item) => {
+        {starship.map((item) => {
           return (
-            <Vehicletarjeta
+            <Starshiptarjeta
               cardtitle={item.name}
               url={item.uid}
               key={item.uid}
@@ -34,4 +34,4 @@ const Vehiclecarrousel = () => {
   );
 };
 
-export default Vehiclecarrousel;
+export default Starshipcarrousel;
