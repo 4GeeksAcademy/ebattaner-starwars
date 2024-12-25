@@ -4,27 +4,27 @@ import { NavLink, useParams } from "react-router";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-const Starshipunico = () => {
+const SpeciesUnico = () => {
   const { id } = useParams();
-  const [starshipUnico, setStarshipUnico] = useState({});
-  const url = "https://www.swapi.tech/api/starships";
+  const [speciesUnico, setSpeciesUnico] = useState({});
+  const url = "https://www.swapi.tech/api/species";
 
-  const fetchStarshipUnico = () => {
+  const fetchSpeciesUnico = () => {
     fetch(`${url}/${id}`, { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setStarshipUnico(data.result))
+      .then((data) => setSpeciesUnico(data.result))
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    fetchStarshipUnico();
+    fetchSpeciesUnico();
   }, [id]);
 
-  if (isEmpty(starshipUnico)) {
+  if (isEmpty(speciesUnico)) {
     return <p>Cargando...</p>;
   }
 
-  const { properties } = starshipUnico;
+  const { properties } = speciesUnico;
 
   return (
     <>
@@ -47,4 +47,4 @@ const Starshipunico = () => {
   );
 };
 
-export default Starshipunico;
+export default SpeciesUnico;
