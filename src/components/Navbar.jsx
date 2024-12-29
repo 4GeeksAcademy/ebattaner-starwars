@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useFavorites } from "./Favorites";
+import { NavLink } from "react-router";
 
 const NavbarComponent = () => {
   const { favorites, removeFavorite } = useFavorites();
@@ -16,7 +17,7 @@ const NavbarComponent = () => {
       data-bs-theme="dark"
     >
       <Container>
-        <Navbar.Brand href="#home">STAR WARS WEB</Navbar.Brand>
+        <Navbar.Brand href="/">STAR WARS WEB</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -24,25 +25,24 @@ const NavbarComponent = () => {
               <NavDropdown title="Favorites" id="basic-nav-dropdown">
                 {favorites.map((favorite) => (
                   <NavDropdown.Item key={`${favorite.type}-${favorite.id}`}>
-                    <span>
-                      <a href={`/${favorite.type}/${favorite.id}`}>
-                        {favorite.name}
-                      </a>
-                      <button
-                        style={{
-                          marginLeft: "10px",
-                          background: "none",
-                          border: "none",
-                          color: "red",
-                          cursor: "pointer",
-                        }}
-                        onClick={() =>
-                          removeFavorite(favorite.id, favorite.type)
-                        }
-                      >
-                        X
-                      </button>
-                    </span>
+                    <NavLink
+                      to={`/${favorite.type}/${favorite.id}`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      {favorite.name}
+                    </NavLink>
+                    <button
+                      style={{
+                        marginLeft: "10px",
+                        background: "none",
+                        border: "none",
+                        color: "red",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => removeFavorite(favorite.id, favorite.type)}
+                    >
+                      X
+                    </button>
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>

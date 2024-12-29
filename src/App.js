@@ -2,12 +2,12 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router";
 import { routeConfig } from "./routing/routerConfig";
-import CustomNavbar from "./components/Navbar";
+import NavbarComponent from "./components/Navbar";
 
 function App() {
   return (
     <>
-      <CustomNavbar />
+      <NavbarComponent />
       <Routes>
         {routeConfig.map((item) => {
           return (

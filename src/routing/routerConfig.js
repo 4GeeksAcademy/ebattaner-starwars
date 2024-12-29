@@ -11,12 +11,12 @@ export const routeConfig = [
   },
   {
     name: "Vehicleunico",
-    path: "/vehicle/:id",
+    path: "/vehicles/:id",
     page: <Vehicleunico />,
   },
   {
     name: "Starshipunico",
-    path: "/starship/:id",
+    path: "/starships/:id",
     page: <Starshipunico />,
   },
   {
