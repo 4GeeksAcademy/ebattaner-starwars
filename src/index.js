@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router";
+import { FavoritesContext } from "./components/Favorites";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <FavoritesContext>
+        <App />
+      </FavoritesContext>
     </BrowserRouter>
   </React.StrictMode>,
 );
