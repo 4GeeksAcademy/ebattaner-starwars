@@ -7,12 +7,13 @@ import Button from "react-bootstrap/Button";
 const VehicleUnico = () => {
   const { id } = useParams();
   const [vehicleUnico, setVehicleUnico] = useState({});
-  const url = "https://www.swapi.tech/api/vehicles";
+  const url =
+    "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/vehicles";
 
   const fetchVehicleUnico = () => {
     fetch(`${url}/${id}`, { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setVehicleUnico(data.result))
+      .then((data) => setVehicleUnico(data))
       .catch((err) => console.error(err));
   };
 
@@ -31,13 +32,13 @@ const VehicleUnico = () => {
       <Button variant="warning">
         <NavLink to={`/`}>Go back</NavLink>
       </Button>
-      <h1>{properties?.model || "Modelo no disponible"}</h1>
+      <h1>{vehicleUnico?.model || "Modelo no disponible"}</h1>
       <ListGroup>
         <ListGroup.Item>
-          <b>Clase:</b> {properties?.vehicle_class || "Clase no disponible"}
+          <b>Clase:</b> {vehicleUnico?.vehicle_class || "Clase no disponible"}
         </ListGroup.Item>
-        {properties &&
-          Object.entries(properties).map(([key, value]) => (
+        {vehicleUnico &&
+          Object.entries(vehicleUnico).map(([key, value]) => (
             <ListGroup.Item key={key}>
               <b>{key}:</b> {value}
             </ListGroup.Item>

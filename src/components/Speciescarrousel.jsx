@@ -12,9 +12,11 @@ const SpeciesCarrousel = () => {
 
   const fetchSpecies = async () => {
     try {
-      const response = await fetch("https://www.swapi.tech/api/species");
+      const response = await fetch(
+        "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/species",
+      );
       const data = await response.json();
-      setSpecies(data.results || []);
+      setSpecies(data || []);
     } catch (err) {
       console.error("Error fetching species:", err);
     }
@@ -27,27 +29,25 @@ const SpeciesCarrousel = () => {
   return (
     <Row className="g-3">
       {species.map((item) => (
-        <Col sm={6} md={4} lg={3} className="mb-4" key={item.uid}>
+        <Col sm={6} md={4} lg={3} className="mb-4" key={item.id}>
           <Card className="h-100">
             <Card.Body>
               <Card.Title>{item.name}</Card.Title>
-              <NavLink to={`/species/${item.uid}`}>
+              <NavLink to={`/species/${item.id}`}>
                 <Button variant="primary" className="w-100 mb-2">
                   Ver más
                 </Button>
               </NavLink>
               <Button
-                variant={
-                  isFavorited(item.uid, "species") ? "danger" : "success"
-                }
+                variant={isFavorited(item.id, "species") ? "danger" : "success"}
                 className="w-100"
                 onClick={() => {
-                  isFavorited(item.uid, "species")
-                    ? removeFavorite(item.uid, "species")
-                    : addFavorite(item.uid, item.name, "species");
+                  isFavorited(item.id, "species")
+                    ? removeFavorite(item.id, "species")
+                    : addFavorite(item.id, item.name, "species");
                 }}
               >
-                {isFavorited(item.uid, "species") ? "Unfav" : "Fav"}
+                {isFavorited(item.id, "species") ? "Unfav" : "Fav"}
               </Button>
             </Card.Body>
           </Card>

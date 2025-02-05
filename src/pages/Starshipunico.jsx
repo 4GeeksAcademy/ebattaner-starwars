@@ -7,12 +7,13 @@ import Button from "react-bootstrap/Button";
 const Starshipunico = () => {
   const { id } = useParams();
   const [starshipUnico, setStarshipUnico] = useState({});
-  const url = "https://www.swapi.tech/api/starships";
+  const url =
+    "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/starships";
 
   const fetchStarshipUnico = () => {
     fetch(`${url}/${id}`, { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setStarshipUnico(data.result))
+      .then((data) => setStarshipUnico(data))
       .catch((err) => console.error(err));
   };
 
@@ -31,13 +32,13 @@ const Starshipunico = () => {
       <Button variant="warning">
         <NavLink to={`/`}>Go back</NavLink>
       </Button>
-      <h1>{properties?.model || "Modelo no disponible"}</h1>
+      <h1>{starshipUnico?.model || "Modelo no disponible"}</h1>
       <ListGroup>
         <ListGroup.Item>
-          <b>Clase:</b> {properties?.vehicle_class || "Clase no disponible"}
+          <b>Clase:</b> {starshipUnico?.vehicle_class || "Clase no disponible"}
         </ListGroup.Item>
-        {properties &&
-          Object.entries(properties).map(([key, value]) => (
+        {starshipUnico &&
+          Object.entries(starshipUnico).map(([key, value]) => (
             <ListGroup.Item key={key}>
               <b>{key}:</b> {value}
             </ListGroup.Item>

@@ -7,12 +7,13 @@ import Button from "react-bootstrap/Button";
 const SpeciesUnico = () => {
   const { id } = useParams();
   const [speciesUnico, setSpeciesUnico] = useState({});
-  const url = "https://www.swapi.tech/api/species";
+  const url =
+    "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/species";
 
   const fetchSpeciesUnico = () => {
     fetch(`${url}/${id}`, { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setSpeciesUnico(data.result))
+      .then((data) => setSpeciesUnico(data))
       .catch((err) => console.error(err));
   };
 
@@ -31,13 +32,13 @@ const SpeciesUnico = () => {
       <Button variant="warning">
         <NavLink to={`/`}>Go back</NavLink>
       </Button>
-      <h1>{properties?.model || "Modelo no disponible"}</h1>
+      <h1>{speciesUnico?.name || "Modelo no disponible"}</h1>
       <ListGroup>
         <ListGroup.Item>
-          <b>Clase:</b> {properties?.vehicle_class || "Clase no disponible"}
+          <b>Clase:</b> {speciesUnico?.classification || "Clase no disponible"}
         </ListGroup.Item>
-        {properties &&
-          Object.entries(properties).map(([key, value]) => (
+        {speciesUnico &&
+          Object.entries(speciesUnico).map(([key, value]) => (
             <ListGroup.Item key={key}>
               <b>{key}:</b> {value}
             </ListGroup.Item>

@@ -12,9 +12,11 @@ const VehicleCarrousel = () => {
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch("https://www.swapi.tech/api/vehicles");
+      const response = await fetch(
+        "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/vehicles",
+      );
       const data = await response.json();
-      setVehicles(data.results || []);
+      setVehicles(data || []);
     } catch (err) {
       console.error("Error fetching Vehicles:", err);
     }
@@ -27,27 +29,27 @@ const VehicleCarrousel = () => {
   return (
     <Row className="g-3">
       {vehicles.map((item) => (
-        <Col sm={6} md={4} lg={3} className="mb-4" key={item.uid}>
+        <Col sm={6} md={4} lg={3} className="mb-4" key={item.id}>
           <Card className="h-100">
             <Card.Body>
-              <Card.Title>{item.name}</Card.Title>
-              <NavLink to={`/vehicles/${item.uid}`}>
+              <Card.Title>{item.model}</Card.Title>
+              <NavLink to={`/vehicles/${item.id}`}>
                 <Button variant="primary" className="w-100 mb-2">
                   Ver más
                 </Button>
               </NavLink>
               <Button
                 variant={
-                  isFavorited(item.uid, "vehicles") ? "danger" : "success"
+                  isFavorited(item.id, "vehicles") ? "danger" : "success"
                 }
                 className="w-100"
                 onClick={() => {
-                  isFavorited(item.uid, "vehicles")
-                    ? removeFavorite(item.uid, "vehicles")
-                    : addFavorite(item.uid, item.name, "vehicles");
+                  isFavorited(item.id, "vehicles")
+                    ? removeFavorite(item.id, "vehicles")
+                    : addFavorite(item.uid, item.model, "vehicles");
                 }}
               >
-                {isFavorited(item.uid, "vehicles") ? "Unfav" : "Fav"}
+                {isFavorited(item.id, "vehicles") ? "Unfav" : "Fav"}
               </Button>
             </Card.Body>
           </Card>

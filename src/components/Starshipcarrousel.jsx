@@ -12,9 +12,11 @@ const StarshipCarrousel = () => {
 
   const fetchStarships = async () => {
     try {
-      const response = await fetch("https://www.swapi.tech/api/starships");
+      const response = await fetch(
+        "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/starships",
+      );
       const data = await response.json();
-      setStarships(data.results || []);
+      setStarships(data || []);
     } catch (err) {
       console.error("Error fetching Starships:", err);
     }
@@ -30,24 +32,24 @@ const StarshipCarrousel = () => {
         <Col sm={6} md={4} lg={3} className="mb-4" key={item.uid}>
           <Card className="h-100">
             <Card.Body>
-              <Card.Title>{item.name}</Card.Title>
-              <NavLink to={`/starships/${item.uid}`}>
+              <Card.Title>{item.model}</Card.Title>
+              <NavLink to={`/starships/${item.id}`}>
                 <Button variant="primary" className="w-100 mb-2">
                   Ver más
                 </Button>
               </NavLink>
               <Button
                 variant={
-                  isFavorited(item.uid, "starships") ? "danger" : "success"
+                  isFavorited(item.id, "starships") ? "danger" : "success"
                 }
                 className="w-100"
                 onClick={() => {
-                  isFavorited(item.uid, "starships")
-                    ? removeFavorite(item.uid, "starships")
-                    : addFavorite(item.uid, item.name, "starships");
+                  isFavorited(item.id, "starships")
+                    ? removeFavorite(item.id, "starships")
+                    : addFavorite(item.id, item.model, "starships");
                 }}
               >
-                {isFavorited(item.uid, "starships") ? "Unfav" : "Fav"}
+                {isFavorited(item.id, "starships") ? "Unfav" : "Fav"}
               </Button>
             </Card.Body>
           </Card>
