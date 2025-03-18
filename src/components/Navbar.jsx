@@ -60,13 +60,14 @@ const NavbarComponent = () => {
               </Nav>
             )}
           </Navbar.Collapse>
-          {!isEmpty(user) && (
-            <Button
-              className="bg-black text-warning m-3"
-              onClick={() => logout()}
-            >
+          {!isEmpty(user) ? (
+            <Button className="bg-gray  m-3" onClick={() => logout()}>
               Logout
             </Button>
+          ) : (
+            <NavLink to="/login" className="text-decoration-none">
+              <Button className="bg-gray  m-3">Login / Register</Button>
+            </NavLink>
           )}
         </Container>
       </Navbar>

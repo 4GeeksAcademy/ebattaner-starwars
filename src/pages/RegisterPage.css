@@ -1,0 +1,26 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #121212;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ffc107;
+}
+
+.register-form {
+  padding: 20px;
+}
+
+.register-button {
+  background-color: #ffc107;
+  border: none;
+  color: #121212;
+}
+
+.register-button:hover {
+  background-color: #e0a800;
+}

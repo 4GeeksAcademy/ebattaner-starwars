@@ -1,0 +1,22 @@
+.account-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #121212;
+}
+
+.account-card {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ffc107;
+}
+
+.custom-tab-active {
+  background-color: #ffc107;
+  color: #121212 !important;
+}
+
+.custom-tab-inactive {
+  background-color: #343a40;
+  color: #ffc107 !important;
+}

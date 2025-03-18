@@ -6,6 +6,7 @@ import {
   validateUsername,
 } from "../utils/validation";
 import { UserContext } from "../context/UserContext";
+import "./LoginPage.css";
 
 export const LoginPage = () => {
   const [validated, setValidated] = useState(false);
@@ -39,11 +40,11 @@ export const LoginPage = () => {
   };
 
   return (
-    <div>
-      <Card className="bg-black text-warning">
-        <Form className="" noValidate onSubmit={handleSubmit}>
+    <div className="login-page">
+      <Card className="bg-dark text-light login-card">
+        <Form className="login-form" noValidate onSubmit={handleSubmit}>
           <Card.Body>
-            <Card.Title>Login</Card.Title>
+            <Card.Title className="text-center">Login</Card.Title>
             <Row className="mb-3">
               <Form.Group as={Col} md="12" controlId="validationCustomUsername">
                 <Form.Label>Username</Form.Label>
@@ -80,10 +81,7 @@ export const LoginPage = () => {
                 </InputGroup>
               </Form.Group>
             </Row>
-            <Button
-              className="bg-black text-warning border border-warning"
-              type="submit"
-            >
+            <Button className="w-100 mt-3 login-button" type="submit">
               Login
             </Button>
           </Card.Body>

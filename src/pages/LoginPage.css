@@ -1,0 +1,27 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #121212;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ffc107;
+}
+
+.login-form {
+  padding: 20px;
+}
+
+.login-button {
+  background-color: #ffc107;
+  border: none;
+  color: #121212;
+}
+
+.login-button:hover {
+  background-color: #e0a800;
+}

@@ -2,22 +2,22 @@ import { Card, Nav } from "react-bootstrap";
 import { LoginPage } from "./LoginPage";
 import { RegisterPage } from "./RegisterPage";
 import { useState } from "react";
+import "./AccountPage.css"; // Asegúrate de crear este archivo CSS para estilos personalizados
 
 export const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   return (
-    <div className="container-fluid mt-5 p-3 d-flex justify-content-center">
-      <Card className="bg-black text-warning" style={{ width: "18rem" }}>
+    <div className="account-page">
+      <Card className="bg-dark text-light account-card">
         <Card.Header>
           <Nav
             fill
-            selectedkey="bg-black"
             variant="tabs"
             activeKey={activeTab}
-            onSelect={(selectedkey) => setActiveTab(selectedkey)}
+            onSelect={(selectedKey) => setActiveTab(selectedKey)}
           >
-            <Nav.Item className="bg-black">
+            <Nav.Item>
               <Nav.Link
                 className={
                   activeTab === "login"

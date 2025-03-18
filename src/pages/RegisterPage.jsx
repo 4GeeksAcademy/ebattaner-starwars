@@ -6,6 +6,7 @@ import {
   validateUsername,
 } from "../utils/validation";
 import { UserContext } from "../context/UserContext";
+import "./RegisterPage.css"; // Asegúrate de crear este archivo CSS para estilos personalizados
 
 export const RegisterPage = () => {
   const [validated, setValidated] = useState(false);
@@ -43,11 +44,11 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <Card className="bg-black text-warning">
-        <Form className="" noValidate onSubmit={handleSubmit}>
+    <div className="register-page">
+      <Card className="bg-dark text-light register-card">
+        <Form className="register-form" noValidate onSubmit={handleSubmit}>
           <Card.Body>
-            <Card.Title>Register</Card.Title>
+            <Card.Title className="text-center">Register</Card.Title>
             <Row className="mb-3">
               <Form.Group as={Col} md="12" controlId="validationCustomEmail">
                 <Form.Label>Email</Form.Label>
@@ -102,10 +103,7 @@ export const RegisterPage = () => {
                 </InputGroup>
               </Form.Group>
             </Row>
-            <Button
-              className="bg-black text-warning border border-warning"
-              type="submit"
-            >
+            <Button className="w-100 mt-3 register-button" type="submit">
               Register
             </Button>
           </Card.Body>
