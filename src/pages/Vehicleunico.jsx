@@ -4,48 +4,58 @@ import { NavLink, useParams } from "react-router";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-const VehicleUnico = () => {
+const PeopleUnico = () => {
   const { id } = useParams();
-  const [vehicleUnico, setVehicleUnico] = useState({});
+  const [peopleUnico, setPeopleUnico] = useState({});
   const url =
-    "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/vehicles";
+    "https://zany-journey-5gxqqpjgxgr52v6g7-3000.app.github.dev/people";
 
-  const fetchVehicleUnico = () => {
+  const fetchPeopleUnico = () => {
     fetch(`${url}/${id}`, { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setVehicleUnico(data))
+      .then((data) => {
+        console.log("Datos recibidos:", data);
+        setPeopleUnico(data.content); // Acceder a la propiedad 'content'
+      })
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    fetchVehicleUnico();
+    fetchPeopleUnico();
   }, [id]);
 
-  if (isEmpty(vehicleUnico)) {
+  if (isEmpty(peopleUnico)) {
     return <p>Cargando...</p>;
   }
-
-  const { properties } = vehicleUnico;
 
   return (
     <>
       <Button variant="warning">
         <NavLink to={`/`}>Go back</NavLink>
       </Button>
-      <h1>{vehicleUnico?.model || "Modelo no disponible"}</h1>
+      <h1>{peopleUnico?.name || "Nombre no disponible"}</h1>
       <ListGroup>
         <ListGroup.Item>
-          <b>Clase:</b> {vehicleUnico?.vehicle_class || "Clase no disponible"}
+          <b>Color de cabello:</b>{" "}
+          {peopleUnico?.hair_color || "Color de cabello no disponible"}
         </ListGroup.Item>
-        {vehicleUnico &&
-          Object.entries(vehicleUnico).map(([key, value]) => (
-            <ListGroup.Item key={key}>
-              <b>{key}:</b> {value}
-            </ListGroup.Item>
-          ))}
+        <ListGroup.Item>
+          <b>Altura:</b> {peopleUnico?.height || "Altura no disponible"}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Mundo natal:</b>{" "}
+          {peopleUnico?.homeworld || "Mundo natal no disponible"}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Color de piel:</b>{" "}
+          {peopleUnico?.skin_color || "Color de piel no disponible"}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Especie:</b> {peopleUnico?.species || "Especie no disponible"}
+        </ListGroup.Item>
       </ListGroup>
     </>
   );
 };
 
-export default VehicleUnico;
+export default PeopleUnico;

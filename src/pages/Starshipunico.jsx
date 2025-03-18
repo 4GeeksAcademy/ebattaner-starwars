@@ -4,48 +4,53 @@ import { NavLink, useParams } from "react-router";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-const Starshipunico = () => {
+const PlanetUnico = () => {
   const { id } = useParams();
-  const [starshipUnico, setStarshipUnico] = useState({});
+  const [planetUnico, setPlanetUnico] = useState({});
   const url =
-    "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/starships";
+    "https://zany-journey-5gxqqpjgxgr52v6g7-3000.app.github.dev/planets";
 
-  const fetchStarshipUnico = () => {
+  const fetchPlanetUnico = () => {
     fetch(`${url}/${id}`, { method: "GET" })
       .then((res) => res.json())
-      .then((data) => setStarshipUnico(data))
+      .then((data) => {
+        console.log("Datos recibidos:", data);
+        setPlanetUnico(data.content); // Acceder a la propiedad 'content'
+      })
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    fetchStarshipUnico();
+    fetchPlanetUnico();
   }, [id]);
 
-  if (isEmpty(starshipUnico)) {
+  if (isEmpty(planetUnico)) {
     return <p>Cargando...</p>;
   }
-
-  const { properties } = starshipUnico;
 
   return (
     <>
       <Button variant="warning">
         <NavLink to={`/`}>Go back</NavLink>
       </Button>
-      <h1>{starshipUnico?.model || "Modelo no disponible"}</h1>
+      <h1>{planetUnico?.name || "Nombre no disponible"}</h1>
       <ListGroup>
         <ListGroup.Item>
-          <b>Clase:</b> {starshipUnico?.vehicle_class || "Clase no disponible"}
+          <b>Clima:</b> {planetUnico?.climate || "Clima no disponible"}
         </ListGroup.Item>
-        {starshipUnico &&
-          Object.entries(starshipUnico).map(([key, value]) => (
-            <ListGroup.Item key={key}>
-              <b>{key}:</b> {value}
-            </ListGroup.Item>
-          ))}
+        <ListGroup.Item>
+          <b>Diámetro:</b> {planetUnico?.diameter || "Diámetro no disponible"}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Gravedad:</b> {planetUnico?.gravity || "Gravedad no disponible"}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Población:</b>{" "}
+          {planetUnico?.population || "Población no disponible"}
+        </ListGroup.Item>
       </ListGroup>
     </>
   );
 };
 
-export default Starshipunico;
+export default PlanetUnico;

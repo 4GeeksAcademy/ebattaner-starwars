@@ -6,48 +6,54 @@ import { NavLink } from "react-router";
 import { Col } from "react-bootstrap";
 import { useFavorites } from "./Favorites";
 
-const SpeciesCarrousel = () => {
-  const [species, setSpecies] = useState([]);
+const FilmsCarrousel = () => {
+  const [films, setFilms] = useState([]);
   const { addFavorite, removeFavorite, isFavorited } = useFavorites();
 
-  const fetchSpecies = async () => {
+  const fetchFilms = async () => {
     try {
       const response = await fetch(
-        "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/species",
+        "https://zany-journey-5gxqqpjgxgr52v6g7-3000.app.github.dev/films",
       );
       const data = await response.json();
-      setSpecies(data || []);
+      if (Array.isArray(data.content)) {
+        setFilms(data.content);
+      } else {
+        setFilms([]);
+        console.error("Error: La respuesta no es un array");
+      }
     } catch (err) {
-      console.error("Error fetching species:", err);
+      console.error("Error fetching films:", err);
+      setFilms([]);
     }
   };
 
   useEffect(() => {
-    fetchSpecies();
+    fetchFilms();
   }, []);
 
   return (
     <Row className="g-3">
-      {species.map((item) => (
+      {films.map((item) => (
         <Col sm={6} md={4} lg={3} className="mb-4" key={item.id}>
           <Card className="h-100">
             <Card.Body>
               <Card.Title>{item.name}</Card.Title>
-              <NavLink to={`/species/${item.id}`}>
+              <NavLink to={`/films/${item.id}`}>
                 <Button variant="primary" className="w-100 mb-2">
                   Ver más
                 </Button>
               </NavLink>
               <Button
-                variant={isFavorited(item.id, "species") ? "danger" : "success"}
+                variant={isFavorited(item.id, "films") ? "danger" : "success"}
                 className="w-100"
                 onClick={() => {
-                  isFavorited(item.id, "species")
-                    ? removeFavorite(item.id, "species")
-                    : addFavorite(item.id, item.name, "species");
+                  isFavorited(item.id, "films")
+                    ? removeFavorite(item.id, "films")
+                    : addFavorite(item.id, item.name, "films");
                 }}
               >
-                {isFavorited(item.id, "species") ? "Unfav" : "Fav"}
+                {isFavorited(item.id, "films") ? "Unfav" : "Fav"}
               </Button>
             </Card.Body>
           </Card>
@@ -57,4 +63,4 @@ const SpeciesCarrousel = () => {
   );
 };
 
-export default SpeciesCarrousel;
+export default FilmsCarrousel;

@@ -1,10 +1,10 @@
-import Starshipcarrousel from "./Starshipcarrousel";
+import PlanetCarrousel from "./Starshipcarrousel";
 
 const Starshipcomponent = () => {
   return (
     <>
-      <h1>Starships</h1>
-      <Starshipcarrousel />
+      <h1>Planets: </h1>
+      <PlanetCarrousel />
     </>
   );
 };

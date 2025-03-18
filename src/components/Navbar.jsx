@@ -1,56 +1,77 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { useFavorites } from "./Favorites";
 import { NavLink } from "react-router";
 
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+
+import { useContext } from "react";
+import { ContextoFavoritos } from "../context/Favoritos";
+import { Nav, Badge, Button } from "react-bootstrap";
+import { isEmpty } from "lodash";
+import { UserContext } from "../context/UserContext";
+
 const NavbarComponent = () => {
-  const { favorites, removeFavorite } = useFavorites();
+  const { favoritos, deleteFavorite } = useContext(ContextoFavoritos);
+  const { user, logout } = useContext(UserContext);
 
   return (
-    <Navbar
-      expand="lg"
-      className="bg-body-tertiary"
-      bg="dark"
-      data-bs-theme="dark"
-    >
-      <Container>
-        <Navbar.Brand href="/">STAR WARS WEB</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            {favorites.length > 0 && (
-              <NavDropdown title="Favorites" id="basic-nav-dropdown">
-                {favorites.map((favorite) => (
-                  <NavDropdown.Item key={`${favorite.type}-${favorite.id}`}>
-                    <NavLink
-                      to={`/${favorite.type}/${favorite.id}`}
-                      style={{ textDecoration: "none", color: "inherit" }}
-                    >
-                      {favorite.name}
-                    </NavLink>
-                    <button
-                      style={{
-                        marginLeft: "10px",
-                        background: "none",
-                        border: "none",
-                        color: "red",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => removeFavorite(favorite.id, favorite.type)}
-                    >
-                      X
-                    </button>
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
+    <>
+      <Navbar expand="lg" className="bg-body-secondary mb-5" fixed="top">
+        <Container>
+          <NavLink to="/" className="text-decoration-none">
+            <Navbar.Brand>Star Wars Data Base</Navbar.Brand>
+          </NavLink>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            {!isEmpty(user) && !isEmpty(favoritos) && (
+              <Nav>
+                <NavDropdown
+                  id="nav-dropdown-dark-example"
+                  title="Favorites"
+                  menuVariant="light"
+                >
+                  {favoritos.map((fav) => {
+                    return (
+                      <NavDropdown.Item
+                        as="div"
+                        key={`${fav.type_enum}${fav.favorite_id}`}
+                      >
+                        <NavLink to={`${fav.type_enum}/${fav.external_id}`}>
+                          {fav.name}
+                        </NavLink>
+                        <Badge
+                          as="button"
+                          bg="danger"
+                          className="ms-2"
+                          onClick={() => {
+                            deleteFavorite(
+                              fav.external_id,
+                              fav.type_enum,
+                              fav.favorite_id,
+                            );
+                          }}
+                        >
+                          X
+                        </Badge>
+                      </NavDropdown.Item>
+                    );
+                  })}
+                </NavDropdown>
+              </Nav>
             )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </Navbar.Collapse>
+          {!isEmpty(user) && (
+            <Button
+              className="bg-black text-warning m-3"
+              onClick={() => logout()}
+            >
+              Logout
+            </Button>
+          )}
+        </Container>
+      </Navbar>
+      <hr />
+    </>
   );
 };
 

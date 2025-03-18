@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router";
+import { UserProvider } from "./context/UserContext";
 import { FavoritesProvider } from "./components/Favorites";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -11,9 +12,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <FavoritesProvider>
-        <App />
-      </FavoritesProvider>
+      <UserProvider>
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

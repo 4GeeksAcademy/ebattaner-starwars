@@ -6,50 +6,54 @@ import { NavLink } from "react-router";
 import { Col } from "react-bootstrap";
 import { useFavorites } from "./Favorites";
 
-const VehicleCarrousel = () => {
-  const [vehicles, setVehicles] = useState([]);
+const PeopleCarrousel = () => {
+  const [people, setPeople] = useState([]);
   const { addFavorite, removeFavorite, isFavorited } = useFavorites();
 
-  const fetchVehicles = async () => {
+  const fetchPeople = async () => {
     try {
       const response = await fetch(
-        "https://solid-palm-tree-wrg77jprg7q53grg6-3000.app.github.dev/vehicles",
+        "https://zany-journey-5gxqqpjgxgr52v6g7-3000.app.github.dev/people",
       );
       const data = await response.json();
-      setVehicles(data || []);
+      if (Array.isArray(data.content)) {
+        setPeople(data.content);
+      } else {
+        setPeople([]);
+        console.error("Error: La respuesta no es un array");
+      }
     } catch (err) {
-      console.error("Error fetching Vehicles:", err);
+      console.error("Error fetching people:", err);
+      setPeople([]);
     }
   };
 
   useEffect(() => {
-    fetchVehicles();
+    fetchPeople();
   }, []);
 
   return (
     <Row className="g-3">
-      {vehicles.map((item) => (
+      {people.map((item) => (
         <Col sm={6} md={4} lg={3} className="mb-4" key={item.id}>
           <Card className="h-100">
             <Card.Body>
-              <Card.Title>{item.model}</Card.Title>
-              <NavLink to={`/vehicles/${item.id}`}>
+              <Card.Title>{item.name}</Card.Title>
+              <NavLink to={`/people/${item.id}`}>
                 <Button variant="primary" className="w-100 mb-2">
                   Ver más
                 </Button>
               </NavLink>
               <Button
-                variant={
-                  isFavorited(item.id, "vehicles") ? "danger" : "success"
-                }
+                variant={isFavorited(item.id, "people") ? "danger" : "success"}
                 className="w-100"
                 onClick={() => {
-                  isFavorited(item.id, "vehicles")
-                    ? removeFavorite(item.id, "vehicles")
-                    : addFavorite(item.uid, item.model, "vehicles");
+                  isFavorited(item.id, "people")
+                    ? removeFavorite(item.id, "people")
+                    : addFavorite(item.id, item.name, "people");
                 }}
               >
-                {isFavorited(item.id, "vehicles") ? "Unfav" : "Fav"}
+                {isFavorited(item.id, "people") ? "Unfav" : "Fav"}
               </Button>
             </Card.Body>
           </Card>
@@ -59,4 +63,4 @@ const VehicleCarrousel = () => {
   );
 };
 
-export default VehicleCarrousel;
+export default PeopleCarrousel;

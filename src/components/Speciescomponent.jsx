@@ -1,10 +1,10 @@
-import Speciescarrousel from "./Speciescarrousel";
+import FilmsCarrousel from "./Speciescarrousel";
 
 const Speciescomponent = () => {
   return (
     <>
-      <h1>Species:</h1>
-      <Speciescarrousel />
+      <h1>Films:</h1>
+      <FilmsCarrousel />
     </>
   );
 };

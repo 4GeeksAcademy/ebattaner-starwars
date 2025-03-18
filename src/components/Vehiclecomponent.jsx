@@ -1,10 +1,10 @@
-import Vehiclecarrousel from "./vehicleCarrousel";
+import PeopleCarrousel from "./vehicleCarrousel";
 
 const Vehiclecomponent = () => {
   return (
     <>
-      <h1>Vehicles</h1>
-      <Vehiclecarrousel />
+      <h1>People</h1>
+      <PeopleCarrousel />
     </>
   );
 };

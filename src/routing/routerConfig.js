@@ -1,7 +1,9 @@
 import Landing from "../pages/Landing";
-import Vehicleunico from "../pages/Vehicleunico";
-import Starshipunico from "../pages/Starshipunico";
-import SpeciesUnico from "../pages/Speciesunico";
+import Peopleunico from "../pages/Vehicleunico";
+import Planetunico from "../pages/Starshipunico";
+import FilmsUnico from "../pages/Speciesunico";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
 export const routeConfig = [
   {
@@ -11,17 +13,27 @@ export const routeConfig = [
   },
   {
     name: "Vehicleunico",
-    path: "/vehicles/:id",
-    page: <Vehicleunico />,
+    path: "/people/:id",
+    page: <Peopleunico />,
   },
   {
-    name: "Starshipunico",
-    path: "/starships/:id",
-    page: <Starshipunico />,
+    name: "Planetunico",
+    path: "/planets/:id",
+    page: <Planetunico />,
   },
   {
     name: "Speciesunico",
-    path: "/species/:id",
-    page: <SpeciesUnico />,
+    path: "/films/:id",
+    page: <FilmsUnico />,
+  },
+  {
+    name: "Login",
+    path: "/login",
+    page: <LoginPage />,
+  },
+  {
+    name: "Register",
+    path: "/register",
+    page: <RegisterPage />,
   },
 ];
